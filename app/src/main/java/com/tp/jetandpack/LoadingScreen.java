@@ -81,16 +81,10 @@ public class LoadingScreen extends GLScreen {
 
             if (screenToLoad.equals("MainMenuScreen"))
                 game.setScreen(new MainMenuScreen(game));
-
-
             else if(screenToLoad.equals("WorldSelectScreen"))
                 game.setScreen(new WorldSelectScreen(game));
-
-
             else if(screenToLoad.equals("WorldOneSelectScreen"))
                 game.setScreen(new WorldOneLevelSelectScreen(game));
-
-
             else if(screenToLoad.equals("WorldOneLevelOneScreen"))
                 game.setScreen(new WorldOneLevelOneScreen(game));
             /*
