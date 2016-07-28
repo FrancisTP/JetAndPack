@@ -251,7 +251,6 @@ public class MainMenuScreen extends GLScreen {
 	@SuppressLint("FloatMath")
 	public void presentLoading(float deltaTime){
 		presentRunning(deltaTime);
-
 	}
 
 	@SuppressLint("FloatMath")
@@ -277,7 +276,7 @@ public class MainMenuScreen extends GLScreen {
 		// Draw all objects
 		batcher.beginBatch(Assets.mainMenuObjectsSprites);
 
-			// Draw stars
+		// Draw stars
 		starOne.draw(batcher);
 		starTwo.draw(batcher);
 		starThree.draw(batcher);

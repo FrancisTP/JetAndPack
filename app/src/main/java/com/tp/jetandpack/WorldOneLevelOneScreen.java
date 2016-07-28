@@ -41,7 +41,7 @@ public class WorldOneLevelOneScreen extends Levels {
 
     @Override
     public void update(float deltaTime){
-        deltaT = deltaTime;
+        deltaT += deltaTime;
 
         SoundController.update();
 
@@ -76,8 +76,6 @@ public class WorldOneLevelOneScreen extends Levels {
                 if (event.type == Input.TouchEvent.TOUCH_DOWN) {
                     touchPoint.set(event.x, event.y);
                     guiCam.touchToWorld(touchPoint);
-
-
                 }
                 if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
                     touchPoint.set(event.x, event.y);
