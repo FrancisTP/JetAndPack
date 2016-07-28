@@ -24,9 +24,9 @@ public class Levels extends GLScreen{
     Vector2 touchPoint;
     FPSCounter fpsCounter = new FPSCounter();
 
-    final static int LOADING_STATE = -1;
-    final static int RUNNING_STATE = 0;
-    final static int PAUSE_STATE = 2;
+    final int LOADING_STATE = -1;
+    final int RUNNING_STATE = 0;
+    final int PAUSE_STATE = 2;
 
     float stateTime;
 
