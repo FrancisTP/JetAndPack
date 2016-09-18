@@ -48,8 +48,8 @@ public class Assets {
 	// Astronaut
 	public static Texture astronautTexture;
 	public static TextureRegion astronautBody;
-	public static TextureRegion neutralFace;
-	public static TextureRegion worriedFace;
+	public static TextureRegion astronautNeutralFace;
+	public static TextureRegion astronautWorriedFace;
 	public static TextureRegion astronautLeftArm;
 	public static TextureRegion astronautRightArm;
 
@@ -377,6 +377,7 @@ public class Assets {
 
 	public static void loadWorldOneLevels(GLGame game){
 		loadPauseMenu(game);
+		loadAstronaut(game);
 
 		worldOneBackgroundSprite = new Texture(game, "WorldOneSelectorBackground.png");
 		worldOneBackground = new TextureRegion(worldOneBackgroundSprite, 0, 0, 1280, 800);
@@ -387,16 +388,19 @@ public class Assets {
 	}
 	public static void reloadWorldOneLevels(){
 		reloadPauseMenu();
+		reloadAstronaut();
 		worldOneBackgroundSprite.reload();
 		worldOnePlanetSpriteSheet.reload();
 	}
 	public static void unloadWorldOneLevels(){
 		unloadPauseMenu();
+		unloadAstronaut();
 		worldOneBackgroundSprite.dispose();
 		worldOnePlanetSpriteSheet.dispose();
 	}
 	public static void clearWorldOneLevels(){
 		clearPauseMenu();
+		clearAstronaut();
 		worldOneBackgroundSprite = null;
 		worldOneBackground = null;
 
@@ -460,8 +464,8 @@ public class Assets {
 	// Astronaut
 	public static Texture astronautTexture;
 	public static TextureRegion astronautBody;
-	public static TextureRegion neutralFace;
-	public static TextureRegion worriedFace;
+	public static TextureRegion astronautNeutralFace;
+	public static TextureRegion astronautWorriedFace;
 	public static TextureRegion astronautLeftArm;
 	public static TextureRegion astronautRightArm;
 
@@ -488,8 +492,8 @@ public class Assets {
 		astronautTexture = new Texture(game, "AstronautSP.png");
 
 		astronautBody = new TextureRegion(astronautTexture, 1,1,72,121);
-		neutralFace = new TextureRegion(astronautTexture, 170,197,37,32);
-		worriedFace = new TextureRegion(astronautTexture, 209,197,37,32);
+		astronautNeutralFace = new TextureRegion(astronautTexture, 170,197,37,32);
+		astronautWorriedFace = new TextureRegion(astronautTexture, 209,197,37,32);
 		astronautLeftArm = new TextureRegion(astronautTexture, 87,197,39,56);
 		astronautRightArm = new TextureRegion(astronautTexture, 128,197,40,33);
 
@@ -526,8 +530,8 @@ public class Assets {
 		astronautTexture = null;
 
 		astronautBody = null;
-		neutralFace = null;
-		worriedFace = null;
+		astronautNeutralFace = null;
+		astronautWorriedFace = null;
 		astronautLeftArm = null;
 		astronautRightArm = null;
 

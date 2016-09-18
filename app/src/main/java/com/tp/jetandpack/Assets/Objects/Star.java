@@ -2,15 +2,14 @@ package com.tp.jetandpack.Assets.Objects;
 
 import com.tp.framework.gl.SpriteBatcher;
 import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Objects.Object;
 
 import java.util.Random;
 
 /**
  * Created by Francis on 2015-06-24.
  */
-public class Star {
-    float x, y;
-    float width, height;
+public class Star extends Object{
     float shiningPeriod;
 
     float defaultWidth, defaultHeight;

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import com.tp.framework.Game;
 import com.tp.framework.Input;
 import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Astronaut.Astronaut;
 import com.tp.jetandpack.Menues.Buttons.Levels;
 import com.tp.jetandpack.Menues.Buttons.PauseButton;
 import com.tp.jetandpack.Settings.SoundController;
@@ -27,6 +28,8 @@ public class WorldOneLevelOneScreen extends Levels {
     final int BOUNDS_CHOSEN_NOT_TOUCHED = 2;
     final int BOUNDS_CHOSEN_TOUCHED = 3;
 
+    private Astronaut astronaut;
+
     public WorldOneLevelOneScreen(Game game) {
         super(game);
 
@@ -35,6 +38,8 @@ public class WorldOneLevelOneScreen extends Levels {
         planet = new Planet("WorldOne");
 
         deltaT = 0;
+
+        astronaut = new Astronaut(640, 400);
 
         state = RUNNING_STATE;
     }
@@ -49,6 +54,7 @@ public class WorldOneLevelOneScreen extends Levels {
             List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
             game.getInput().getKeyEvents();
 
+            astronaut.update(deltaTime);
 
             listenToTouches(touchEvents);
         }
@@ -109,6 +115,10 @@ public class WorldOneLevelOneScreen extends Levels {
 
         batcher.beginBatch(Assets.worldOnePlanetSpriteSheet);
         planet.display(batcher);
+        batcher.endBatch();
+
+        batcher.beginBatch(Assets.astronautTexture);
+        astronaut.drawSprite(batcher);
         batcher.endBatch();
 
         batcher.beginBatch(Assets.pauseMenuSpriteSheet);

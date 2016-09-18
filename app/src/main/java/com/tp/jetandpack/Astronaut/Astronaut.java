@@ -7,6 +7,7 @@ import com.tp.framework.GameObjectCircle;
 import com.tp.framework.GameObjectRectangle;
 import com.tp.framework.gl.SpriteBatcher;
 import com.tp.framework.math.Vector2;
+import com.tp.jetandpack.Assets.Assets;
 
 public class Astronaut extends DynamicGameObject{
 	Vector2 leftArm;
@@ -109,6 +110,13 @@ public class Astronaut extends DynamicGameObject{
 	
 	public void hit(){
 		state = HIT_STATE;
+	}
+
+	public void drawSprite(SpriteBatcher batcher) {
+		batcher.drawSprite(head.x, head.y, Assets.astronautNeutralFace.width, Assets.astronautNeutralFace.height, Assets.astronautNeutralFace);
+		batcher.drawSprite(body.x+5, body.y-10, Assets.astronautLeftArm.width, Assets.astronautLeftArm.height, -7.6f, 20.15f, armRotation, Assets.astronautLeftArm);//7.6f, 20.15f
+		batcher.drawSprite(body.x, body.y, Assets.astronautBody.width, Assets.astronautBody.height, Assets.astronautBody);
+		batcher.drawSprite(body.x+10, body.y, Assets.astronautRightArm.width, Assets.astronautRightArm.height, -12.5f, 10.30f, armRotation, Assets.astronautRightArm);//12.5f, 10.30f
 	}
 	
 	public void drawShape(SpriteBatcher batcher){
