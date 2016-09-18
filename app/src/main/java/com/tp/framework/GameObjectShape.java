@@ -1,8 +1,6 @@
 package com.tp.framework;
 
-import android.util.Log;
-
-import com.tp.jetandpack.Assets;
+import com.tp.jetandpack.Assets.Assets;
 import com.tp.framework.gl.SpriteBatcher;;
 
 

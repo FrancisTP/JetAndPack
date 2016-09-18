@@ -1,10 +1,7 @@
 package com.tp.framework;
 
-import android.util.Log;
-import com.tp.framework.GameObjectRectangle;
-import com.tp.framework.gl.SpriteBatcher;
 import com.tp.framework.math.Circle;
-import com.tp.jetandpack.Astronaut;
+import com.tp.jetandpack.Astronaut.Astronaut;
 
 public class CollisionTester {
 	
