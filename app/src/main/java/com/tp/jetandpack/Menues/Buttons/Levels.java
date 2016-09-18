@@ -67,7 +67,7 @@ public class Levels extends GLScreen{
 
     public void listenToTouches(List<Input.TouchEvent> touchEvents) {
         int len = touchEvents.size();
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len && touchEvents.size() != 0; i++) {
             Input.TouchEvent event = touchEvents.get(i);
 
 

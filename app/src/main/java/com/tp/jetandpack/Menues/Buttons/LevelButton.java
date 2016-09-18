@@ -45,7 +45,7 @@ public class LevelButton {
     public void listenToTouches(List<Input.TouchEvent> touchEvents, Camera2D guiCam, Game game, GLGame glGame, Vector2 touchPoint, String screen) {
         int len = touchEvents.size();
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len && touchEvents.size() != 0; i++) {
             Input.TouchEvent event = touchEvents.get(i);
 
             touchPoint.set(event.x, event.y);

@@ -119,7 +119,7 @@ public class WorldSelectScreen extends GLScreen{
 
     public void listenToTouches(List<TouchEvent> touchEvents) {
         int len = touchEvents.size();
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len && touchEvents.size() != 0; i++) {
             TouchEvent event = touchEvents.get(i);
 
             if (event.type == TouchEvent.TOUCH_UP) {

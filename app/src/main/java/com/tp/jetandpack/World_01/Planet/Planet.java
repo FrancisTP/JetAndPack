@@ -102,7 +102,7 @@ public class Planet {
 
         int len = touchEvents.size();
 
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < len && touchEvents.size() != 0; i++) {
             Input.TouchEvent event = touchEvents.get(i);
 
             touchPoint.set(event.x, event.y);

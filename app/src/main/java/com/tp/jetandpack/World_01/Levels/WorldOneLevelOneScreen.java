@@ -40,12 +40,12 @@ public class WorldOneLevelOneScreen extends Levels {
     }
 
     @Override
-    public void update(float deltaTime){
+    public void update(float deltaTime) {
         deltaT += deltaTime;
 
         SoundController.update();
 
-        if(Assets.readyState){
+        if (Assets.readyState) {
             List<Input.TouchEvent> touchEvents = game.getInput().getTouchEvents();
             game.getInput().getKeyEvents();
 
@@ -62,34 +62,33 @@ public class WorldOneLevelOneScreen extends Levels {
         int len = touchEvents.size();
 
         pauseButton.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint);
-        if (state == RUNNING_STATE) {
-            for (int i = 0; i < len; i++) {
-                Input.TouchEvent event = touchEvents.get(i);
+        for (int i = 0; i < len && touchEvents.size() != 0; i++) {
+            Input.TouchEvent event = touchEvents.get(i);
 
-                planet.listenToTouches(touchEvents, guiCam, game, glGame, deltaT);
+            planet.listenToTouches(touchEvents, guiCam, game, glGame, deltaT);
 
-                if (event.type == Input.TouchEvent.TOUCH_UP) {
-                    touchPoint.set(event.x, event.y);
-                    guiCam.touchToWorld(touchPoint);
+            if (event.type == Input.TouchEvent.TOUCH_UP) {
+                touchPoint.set(event.x, event.y);
+                guiCam.touchToWorld(touchPoint);
 
-                }
-                if (event.type == Input.TouchEvent.TOUCH_DOWN) {
-                    touchPoint.set(event.x, event.y);
-                    guiCam.touchToWorld(touchPoint);
-                }
-                if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
-                    touchPoint.set(event.x, event.y);
-                    guiCam.touchToWorld(touchPoint);
+            }
+            if (event.type == Input.TouchEvent.TOUCH_DOWN) {
+                touchPoint.set(event.x, event.y);
+                guiCam.touchToWorld(touchPoint);
+            }
+            if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
+                touchPoint.set(event.x, event.y);
+                guiCam.touchToWorld(touchPoint);
 
 
-                }
             }
         }
+
     }
 
     @SuppressLint("FloatMath")
     @Override
-    public void present(float deltaTime){
+    public void present(float deltaTime) {
         stateTime += deltaTime; // updates stateTime if we want frame independent movement
 
         // Initiates everything needed to render sprites
@@ -120,14 +119,14 @@ public class WorldOneLevelOneScreen extends Levels {
     }
 
     @Override
-    public void pause(){
+    public void pause() {
     }
 
     @Override
-    public void resume(){
+    public void resume() {
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
     }
 }

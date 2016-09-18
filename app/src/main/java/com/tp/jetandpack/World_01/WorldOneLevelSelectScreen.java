@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class WorldOneLevelSelectScreen extends GLScreen{
+public class WorldOneLevelSelectScreen extends GLScreen {
     // Variables
     Camera2D guiCam;
     SpriteBatcher batcher;
@@ -104,14 +104,14 @@ public class WorldOneLevelSelectScreen extends GLScreen{
     }
 
     @Override
-    public void update(float deltaTime){
+    public void update(float deltaTime) {
         SoundController.update();
 
-        if(Assets.readyState){
+        if (Assets.readyState) {
             List<TouchEvent> touchEvents = game.getInput().getTouchEvents();
             game.getInput().getKeyEvents();
 
-            if(state == RUNNING_STATE)
+            if (state == RUNNING_STATE)
                 listenToTouches(touchEvents);
         }
 
@@ -120,60 +120,58 @@ public class WorldOneLevelSelectScreen extends GLScreen{
     }
 
     public void listenToTouches(List<TouchEvent> touchEvents) {
-        if (Assets.readyState) {
-            int len = touchEvents.size();
+        int len = touchEvents.size();
 
 
-            for (int i = 0; i < len; i++) {
-                TouchEvent event = touchEvents.get(i);
+        for (int i = 0; i < len && touchEvents.size() != 0; i++) {
+            TouchEvent event = touchEvents.get(i);
 
-                levelButtonOne.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelOneScreen");
-                levelButtonTwo.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelTwoScreen");
-                levelButtonThree.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelThreeScreen");
-                levelButtonFour.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelFourScreen");
-                levelButtonFive.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelFiveScreen");
-                levelButtonSix.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelSixScreen");
-                levelButtonSeven.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelSevenScreen");
-                levelButtonEight.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelEightScreen");
+            levelButtonOne.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelOneScreen");
+            levelButtonTwo.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelTwoScreen");
+            levelButtonThree.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelThreeScreen");
+            levelButtonFour.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelFourScreen");
+            levelButtonFive.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelFiveScreen");
+            levelButtonSix.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelSixScreen");
+            levelButtonSeven.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelSevenScreen");
+            levelButtonEight.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint, "WorldOneLevelEightScreen");
 
-                if (event.type == TouchEvent.TOUCH_UP) {
-                    touchPoint.set(event.x, event.y);
-                    guiCam.touchToWorld(touchPoint);
+            if (event.type == TouchEvent.TOUCH_UP) {
+                touchPoint.set(event.x, event.y);
+                guiCam.touchToWorld(touchPoint);
 
+                backLevelSelectState = BOUNDS_NOT_TOUCHED;
+
+                if (OverlapTester.pointInRectangle(backWorldSelectorBounds, touchPoint)) {
+                    //state = CHANGE_SCREEN_STATE;
+                    game.setScreen(new LoadingScreen(glGame, "WorldSelectScreen"));
+                    return;
+                }
+
+
+            }
+            if (event.type == TouchEvent.TOUCH_DOWN) {
+                touchPoint.set(event.x, event.y);
+                guiCam.touchToWorld(touchPoint);
+
+                if (OverlapTester.pointInRectangle(backWorldSelectorBounds, touchPoint))
+                    backLevelSelectState = BOUNDS_TOUCHED;
+
+
+            }
+            if (event.type == TouchEvent.TOUCH_DRAGGED) {
+                touchPoint.set(event.x, event.y);
+                guiCam.touchToWorld(touchPoint);
+
+                if (!OverlapTester.pointInRectangle(backWorldSelectorBounds, touchPoint))
                     backLevelSelectState = BOUNDS_NOT_TOUCHED;
 
-                    if (OverlapTester.pointInRectangle(backWorldSelectorBounds, touchPoint)) {
-                        //state = CHANGE_SCREEN_STATE;
-                        game.setScreen(new LoadingScreen(glGame, "WorldSelectScreen"));
-                        return;
-                    }
-
-
-                }
-                if (event.type == TouchEvent.TOUCH_DOWN) {
-                    touchPoint.set(event.x, event.y);
-                    guiCam.touchToWorld(touchPoint);
-
-                    if (OverlapTester.pointInRectangle(backWorldSelectorBounds, touchPoint))
-                        backLevelSelectState = BOUNDS_TOUCHED;
-
-
-                }
-                if (event.type == TouchEvent.TOUCH_DRAGGED) {
-                    touchPoint.set(event.x, event.y);
-                    guiCam.touchToWorld(touchPoint);
-
-                    if (!OverlapTester.pointInRectangle(backWorldSelectorBounds, touchPoint))
-                        backLevelSelectState = BOUNDS_NOT_TOUCHED;
-
-                }
             }
         }
     }
 
     @SuppressLint("FloatMath")
     @Override
-    public void present(float deltaTime){
+    public void present(float deltaTime) {
         stateTime += deltaTime; // updates stateTime if we want frame independent movement
 
         // Initiates everything needed to render sprites
@@ -188,7 +186,6 @@ public class WorldOneLevelSelectScreen extends GLScreen{
         gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
 
-
         // Draw
         batcher.beginBatch(Assets.worldOneSelectBackgroundTexture);
         batcher.drawSprite(640, 400, 1280, 800, Assets.worldOneSelectBackground);
@@ -197,7 +194,7 @@ public class WorldOneLevelSelectScreen extends GLScreen{
         batcher.beginBatch(Assets.worldOneSelectSprites);
 
 
-        if(backLevelSelectState == BOUNDS_NOT_TOUCHED)
+        if (backLevelSelectState == BOUNDS_NOT_TOUCHED)
             batcher.drawSprite(70, 70, 141, 141, Assets.backLevelSelectLight);
         else
             batcher.drawSprite(70, 70, 141, 141, Assets.backLevelSelectDark);
@@ -220,14 +217,14 @@ public class WorldOneLevelSelectScreen extends GLScreen{
     }
 
     @Override
-    public void pause(){
+    public void pause() {
     }
 
     @Override
-    public void resume(){
+    public void resume() {
     }
 
     @Override
-    public void dispose(){
+    public void dispose() {
     }
 }
