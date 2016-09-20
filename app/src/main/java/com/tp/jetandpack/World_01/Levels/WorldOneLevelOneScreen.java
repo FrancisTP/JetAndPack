@@ -39,7 +39,7 @@ public class WorldOneLevelOneScreen extends Levels {
 
         deltaT = 0;
 
-        astronaut = new Astronaut(640, 400);
+        astronaut = new Astronaut(640, 520);
 
         state = RUNNING_STATE;
     }

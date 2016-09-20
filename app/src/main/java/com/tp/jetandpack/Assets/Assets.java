@@ -517,7 +517,7 @@ public class Assets {
 		fire = new TextureRegion[] {fire_01, fire_02, fire_03, fire_04, fire_05, fire_06, fire_07, fire_08,
 				fire_09, fire_10 ,fire_11 ,fire_12 ,fire_13 ,fire_14, fire_15, fire_16};
 
-		astronautFire = new Animation(1f, fire);
+		astronautFire = new Animation(0.1f, fire);
 
 	}
 	public static void reloadAstronaut(){

@@ -5,7 +5,9 @@ import android.util.Log;
 import com.tp.framework.DynamicGameObject;
 import com.tp.framework.GameObjectCircle;
 import com.tp.framework.GameObjectRectangle;
+import com.tp.framework.gl.Animation;
 import com.tp.framework.gl.SpriteBatcher;
+import com.tp.framework.gl.TextureRegion;
 import com.tp.framework.math.Vector2;
 import com.tp.jetandpack.Assets.Assets;
 
@@ -106,6 +108,10 @@ public class Astronaut extends DynamicGameObject{
 		jetPack.setPosition(position.x - 20, position.y + 11);
 		leftLeg.setPosition(position.x + 20, position.y - 40);
 		rightLeg.setPosition(position.x - 12, position.y - 36);
+
+		// Arm rotation calculations
+		leftArm = leftArm.rotateAroundPoint(position.x - 5, position.y + 9, -7.6f, 20, armRotation);
+		rightArm = rightArm.rotateAroundPoint(position.x, position.y - 3, -12.5f, 10, armRotation);
 	}
 	
 	public void hit(){
@@ -113,10 +119,16 @@ public class Astronaut extends DynamicGameObject{
 	}
 
 	public void drawSprite(SpriteBatcher batcher) {
-		batcher.drawSprite(head.x, head.y, Assets.astronautNeutralFace.width, Assets.astronautNeutralFace.height, Assets.astronautNeutralFace);
-		batcher.drawSprite(body.x+5, body.y-10, Assets.astronautLeftArm.width, Assets.astronautLeftArm.height, -7.6f, 20.15f, armRotation, Assets.astronautLeftArm);//7.6f, 20.15f
-		batcher.drawSprite(body.x, body.y, Assets.astronautBody.width, Assets.astronautBody.height, Assets.astronautBody);
-		batcher.drawSprite(body.x+10, body.y, Assets.astronautRightArm.width, Assets.astronautRightArm.height, -12.5f, 10.30f, armRotation, Assets.astronautRightArm);//12.5f, 10.30f
+
+		if(state == FALL_STATE){
+			TextureRegion keyFrame = Assets.astronautFire.getKeyFrame(stateTime, Animation.ANIMATION_LOOPING);
+			batcher.drawSprite(position.x - 20, position.y - 60, 41, 96, keyFrame);
+		}
+
+		batcher.drawSprite(rightArm.x, rightArm.y, Assets.astronautRightArm.width, Assets.astronautRightArm.height, armRotation, Assets.astronautRightArm);
+		batcher.drawSprite(position.x + 10, position.y + 40, Assets.astronautNeutralFace.width, Assets.astronautNeutralFace.height, Assets.astronautNeutralFace);
+		batcher.drawSprite(position.x, position.y, Assets.astronautBody.width, Assets.astronautBody.height, Assets.astronautBody);
+		batcher.drawSprite(leftArm.x, leftArm.y, Assets.astronautLeftArm.width, Assets.astronautLeftArm.height, armRotation, Assets.astronautLeftArm);
 	}
 	
 	public void drawShape(SpriteBatcher batcher){
