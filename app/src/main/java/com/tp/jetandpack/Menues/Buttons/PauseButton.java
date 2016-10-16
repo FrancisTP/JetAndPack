@@ -27,7 +27,7 @@ public class PauseButton {
 
     final int LOADING_STATE = -1;
     final int RUNNING_STATE = 0;
-    final int PAUSE_STATE = 2;
+    final int PAUSED_STATE = 2;
 
     boolean buttonPressed;
 
@@ -69,11 +69,15 @@ public class PauseButton {
         pauseMenu = new PauseMenu(screen);
     }
 
+    public void update(float deltaTime, List<Input.TouchEvent> touchEvents, Camera2D guiCam, Game game, GLGame glGame, Vector2 touchPoint) {
+        pauseMenu.update(deltaTime, touchEvents, guiCam, game, glGame, touchPoint);
+
+        listenToTouches(touchEvents, guiCam, game, glGame, touchPoint);
+    }
+
     public void listenToTouches(List<Input.TouchEvent> touchEvents, Camera2D guiCam, Game game, GLGame glGame, Vector2 touchPoint) {
 
         int len = touchEvents.size();
-
-        pauseMenu.listenToTouches(touchEvents, guiCam, game, glGame, touchPoint);
 
         for (int i = 0; i < len && touchEvents.size() != 0; i++) {
             Input.TouchEvent event = touchEvents.get(i);
@@ -81,47 +85,40 @@ public class PauseButton {
             touchPoint.set(event.x, event.y);
             guiCam.touchToWorld(touchPoint);
 
-            if (event.type == Input.TouchEvent.TOUCH_UP) {
-
+            // Three possible states of the game, three possible finger events for each
+            if (Levels.state == Levels.RUNNING_STATE) {
                 state = BOUNDS_NOT_TOUCHED;
-                if(Levels.state == RUNNING_STATE && !buttonPressed) {
+                if (event.type == Input.TouchEvent.TOUCH_UP) {
                     if (!OverlapTester.pointInRectangle(bounds, touchPoint)) {
-                        Levels.state = RUNNING_STATE;
-                        buttonPressed = false;
-
-                        return;
-                    }
-                } else if(Levels.state == PAUSE_STATE && buttonPressed){
-                    if (!OverlapTester.pointInRectangle(bounds, touchPoint)) {
-                        Levels.state = RUNNING_STATE;
+                        state = BOUNDS_NOT_TOUCHED;
                         buttonPressed = false;
                         return;
-                    }
-                }
-                if (OverlapTester.pointInRectangle(bounds, touchPoint)) {
-                    buttonPressed = false;
-                    return;
-                }
-            }
-
-            if(event.type == Input.TouchEvent.TOUCH_DOWN) {
-                if(Levels.state == RUNNING_STATE) {
-                    if (OverlapTester.pointInRectangle(bounds, touchPoint)) {
+                    } else {
+                        Levels.state = Levels.PAUSED_STATE;
                         state = BOUNDS_TOUCHED;
-                        Levels.state = PAUSE_STATE;
                         buttonPressed = true;
                         return;
                     }
-                }
-            }
-
-            if(event.type == Input.TouchEvent.TOUCH_DRAGGED) {
-                if(Levels.state == RUNNING_STATE || (Levels.state == PAUSE_STATE && buttonPressed)) {
+                } else if(event.type == Input.TouchEvent.TOUCH_DOWN) {
+                    if (OverlapTester.pointInRectangle(bounds, touchPoint)) {
+                        state = BOUNDS_TOUCHED;
+                        buttonPressed = true;
+                        return;
+                    }
+                } else if(event.type == Input.TouchEvent.TOUCH_DRAGGED) {
                     if (!OverlapTester.pointInRectangle(bounds, touchPoint)) {
-                        //buttonPressed = false;
+                        state = BOUNDS_NOT_TOUCHED;
+                        buttonPressed = false;
                         return;
                     }
                 }
+
+            } else if (Levels.state == Levels.PAUSED_STATE) {
+                // Nothing yet
+
+            } else if (Levels.state == Levels.LOADING_STATE) {
+                // Nothing yet
+
             }
         }
     }
@@ -129,18 +126,14 @@ public class PauseButton {
     public void display(SpriteBatcher batcher){
 
 
-        if(Levels.state == RUNNING_STATE) {
+        if(Levels.state == Levels.RUNNING_STATE) {
             if (state == BOUNDS_NOT_TOUCHED)
                 batcher.drawSprite(bounds.x, bounds.y, lightSprite.width, lightSprite.height, lightSprite);
             else {
                 batcher.drawSprite(bounds.x, bounds.y, darkSprite.width, darkSprite.height, darkSprite);
-                Log.d("THIS SHIT DOESNT", " WORK!");
             }
-        } else {
-            if (state == BOUNDS_NOT_TOUCHED)
-                pauseMenu.display(batcher);
-            else
-                batcher.drawSprite(bounds.x, bounds.y, lightSprite.width, lightSprite.height, darkSprite);
+        } else if (Levels.state == Levels.PAUSED_STATE) {
+            pauseMenu.display(batcher);
         }
     }
 }

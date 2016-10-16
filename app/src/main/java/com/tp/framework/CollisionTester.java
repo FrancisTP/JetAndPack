@@ -4,6 +4,17 @@ import com.tp.framework.math.Circle;
 import com.tp.jetandpack.Astronaut.Astronaut;
 
 public class CollisionTester {
+
+	public static boolean DeepCollisionTest(Astronaut astro, GameObjectRectangle rect) {
+
+
+
+		return true;
+	}
+
+	public static boolean DeepCollisionTest(GameObjectRectangle rect, Astronaut astro) {
+		return DeepCollisionTest(astro, rect);
+	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////
 	

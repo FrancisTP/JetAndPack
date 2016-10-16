@@ -50,6 +50,7 @@ public class Assets {
 	public static TextureRegion astronautBody;
 	public static TextureRegion astronautNeutralFace;
 	public static TextureRegion astronautWorriedFace;
+	public static TextureRegion winningPose;
 	public static TextureRegion astronautLeftArm;
 	public static TextureRegion astronautRightArm;
 
@@ -112,6 +113,10 @@ public class Assets {
 	public static Texture worldOnePlanetSpriteSheet;
 	public static TextureRegion worldOnePlanet;
 	public static TextureRegion worldOneWall;
+	public static TextureRegion worldOneEnd;
+
+	public static Texture asteroidTexture;
+	public static TextureRegion asteroid;
 
 	//// Pause Menu
 	public static Texture pauseMenuSpriteSheet;
@@ -199,12 +204,19 @@ public class Assets {
 
 		SplashScreenScreen = new Texture(game, "SplashScreen.png");
 		SplashScreen = new TextureRegion(SplashScreenScreen, 0, 0, 1280, 800);
+
+		// Collision lines
+		collisionLinesTexture = new Texture(game, "CollisionLines.png");
+		line = new TextureRegion(collisionLinesTexture, 519, 2, 2, 2);
+		circle = new TextureRegion(collisionLinesTexture, 2, 2, 515, 515);
 	}
 	public static void reloadAlwaysLoaded(){
 		SplashScreenScreen.reload();
+		collisionLinesTexture.reload();
 	}
 	public static void unloadAlwaysLoaded(){
 		SplashScreenScreen.dispose();
+		collisionLinesTexture.dispose();
 	}
 	public static void clearAlwaysLoaded(){
 
@@ -212,6 +224,11 @@ public class Assets {
 
 		SplashScreenScreen = null;
 		SplashScreen = null;
+
+		// Collision lines
+		collisionLinesTexture = null;
+		line = null;
+		circle = null;
 	}
 
 
@@ -238,21 +255,14 @@ public class Assets {
 		mainMenuStore = new TextureRegion(mainMenuObjectsSprites, 1100, 166, 138, 45);
 		mainMenuTitleContour = new TextureRegion(mainMenuObjectsSprites, 2, 2, 542, 244);
 		mainMenuUpgrade = new TextureRegion(mainMenuObjectsSprites, 546, 172, 222, 56);
-
-		// Collision lines
-		collisionLinesTexture = new Texture(game, "CollisionLines.png");
-		line = new TextureRegion(collisionLinesTexture, 519, 2, 2, 2);
-		circle = new TextureRegion(collisionLinesTexture, 2, 2, 515, 515);
 	}
 	public static void reloadMainMenu(){
 		mainMenuBackgroundTexture.reload();
 		mainMenuObjectsSprites.reload();
-		collisionLinesTexture.reload();
 	}
 	public static void unloadMainMenu(){
 		mainMenuBackgroundTexture.dispose();
 		mainMenuObjectsSprites.dispose();
-		collisionLinesTexture.dispose();
 	}
 	public static void clearMainMenu(){
 		
@@ -275,11 +285,6 @@ public class Assets {
 		mainMenuStore = null;
 		mainMenuTitleContour = null;
 		mainMenuUpgrade = null;
-
-		// Collision lines
-		collisionLinesTexture = null;
-		line = null;
-		circle = null;
 	}
 
 
@@ -383,8 +388,12 @@ public class Assets {
 		worldOneBackground = new TextureRegion(worldOneBackgroundSprite, 0, 0, 1280, 800);
 
 		worldOnePlanetSpriteSheet = new Texture(game, "WorldOnePlanetSP.png");
-		worldOnePlanet = new TextureRegion(worldOnePlanetSpriteSheet, 2,2,796,1043);
-		worldOneWall = new TextureRegion(worldOnePlanetSpriteSheet, 2,1047,606,622);
+		worldOnePlanet = new TextureRegion(worldOnePlanetSpriteSheet, 3,3,796,1043);
+		worldOneWall = new TextureRegion(worldOnePlanetSpriteSheet, 3,1050,606,622);
+		worldOneEnd = new TextureRegion(worldOnePlanetSpriteSheet, 3, 1676, 440, 347);
+
+		asteroidTexture = new Texture(game, "asteroid.png");
+		asteroid = new TextureRegion(astronautTexture, 0, 0, 90, 90);
 	}
 	public static void reloadWorldOneLevels(){
 		reloadPauseMenu();
@@ -407,6 +416,7 @@ public class Assets {
 		worldOnePlanetSpriteSheet = null;
 		worldOnePlanet = null;
 		worldOneWall = null;
+		worldOneEnd = null;
 
 	}
 
@@ -460,80 +470,56 @@ public class Assets {
 
 
 	////////////////////////////////////////////////////////////////////////////////////
-	/*
-	// Astronaut
-	public static Texture astronautTexture;
-	public static TextureRegion astronautBody;
-	public static TextureRegion astronautNeutralFace;
-	public static TextureRegion astronautWorriedFace;
-	public static TextureRegion astronautLeftArm;
-	public static TextureRegion astronautRightArm;
+	public static void loadAstronaut(GLGame game) {
+		astronautTexture = new Texture(game, "astronautTexture.png");
 
-	public static Animation astronautFire;
-	public static TextureRegion fire_01;
-	public static TextureRegion fire_02;
-	public static TextureRegion fire_03;
-	public static TextureRegion fire_04;
-	public static TextureRegion fire_05;
-	public static TextureRegion fire_06;
-	public static TextureRegion fire_07;
-	public static TextureRegion fire_08;
-	public static TextureRegion fire_09;
-	public static TextureRegion fire_10;
-	public static TextureRegion fire_11;
-	public static TextureRegion fire_12;
-	public static TextureRegion fire_13;
-	public static TextureRegion fire_14;
-	public static TextureRegion fire_15;
-	public static TextureRegion fire_16;
-	 */
+		astronautBody = new TextureRegion(astronautTexture, 77, 3, 72, 121);
+		astronautLeftArm = new TextureRegion(astronautTexture, 423, 3, 39, 56);
+		astronautNeutralFace = new TextureRegion(astronautTexture, 227, 203, 37, 32);
+		astronautRightArm = new TextureRegion(astronautTexture, 183, 203, 40, 33);
+		astronautWorriedFace = new TextureRegion(astronautTexture, 268, 203, 37, 32);
+		winningPose = new TextureRegion(astronautTexture, 3, 3, 70, 146);
 
-	public static void loadAstronaut(GLGame game){
-		astronautTexture = new Texture(game, "AstronautSP.png");
-
-		astronautBody = new TextureRegion(astronautTexture, 1,1,72,121);
-		astronautNeutralFace = new TextureRegion(astronautTexture, 170,197,37,32);
-		astronautWorriedFace = new TextureRegion(astronautTexture, 209,197,37,32);
-		astronautLeftArm = new TextureRegion(astronautTexture, 87,197,39,56);
-		astronautRightArm = new TextureRegion(astronautTexture, 128,197,40,33);
-
-		fire_01 = new TextureRegion(astronautTexture, 1,124,41,96);
-		fire_02 = new TextureRegion(astronautTexture, 44,124,41,96);
-		fire_03 = new TextureRegion(astronautTexture, 75,1,41,96);
-		fire_04 = new TextureRegion(astronautTexture, 87,99,41,96);
-		fire_05 = new TextureRegion(astronautTexture, 118,1,41,96);
-		fire_06 = new TextureRegion(astronautTexture, 130,99,41,96);
-		fire_07 = new TextureRegion(astronautTexture, 161,1,41,96);
-		fire_08 = new TextureRegion(astronautTexture, 173,99,41,96);
-		fire_09 = new TextureRegion(astronautTexture, 204,1,41,96);
-		fire_10 = new TextureRegion(astronautTexture, 216,99,41,96);
-		fire_11 = new TextureRegion(astronautTexture, 247,1,41,96);
-		fire_12 = new TextureRegion(astronautTexture, 290,1,41,96);
-		fire_13 = new TextureRegion(astronautTexture, 333,1,41,96);
-		fire_14 = new TextureRegion(astronautTexture, 259,99,41,96);
-		fire_15 = new TextureRegion(astronautTexture, 302,99,41,96);
-		fire_16 = new TextureRegion(astronautTexture, 345,99,41,96);
+		fire_01 = new TextureRegion(astronautTexture, 3, 153, 41, 96);
+		fire_02 = new TextureRegion(astronautTexture, 48, 153, 41, 96);
+		fire_03 = new TextureRegion(astronautTexture, 93, 128, 41, 96);
+		fire_04 = new TextureRegion(astronautTexture, 138, 128, 41, 96);
+		fire_05 = new TextureRegion(astronautTexture, 153, 3, 41, 96);
+		fire_06 = new TextureRegion(astronautTexture, 183, 103, 41, 96);
+		fire_07 = new TextureRegion(astronautTexture, 198, 3, 41, 96);
+		fire_08 = new TextureRegion(astronautTexture, 228, 103, 41, 96);
+		fire_09 = new TextureRegion(astronautTexture, 243, 3, 41, 96);
+		fire_10 = new TextureRegion(astronautTexture, 273, 103, 41, 96);
+		fire_11 = new TextureRegion(astronautTexture, 288, 3, 41, 96);
+		fire_12 = new TextureRegion(astronautTexture, 318, 103, 41, 96);
+		fire_13 = new TextureRegion(astronautTexture, 333, 3, 41, 96);
+		fire_14 = new TextureRegion(astronautTexture, 363, 103, 41, 96);
+		fire_15 = new TextureRegion(astronautTexture, 378, 3, 41, 96);
+		fire_16 = new TextureRegion(astronautTexture, 408, 103, 41, 96);
 
 		fire = new TextureRegion[] {fire_01, fire_02, fire_03, fire_04, fire_05, fire_06, fire_07, fire_08,
 				fire_09, fire_10 ,fire_11 ,fire_12 ,fire_13 ,fire_14, fire_15, fire_16};
 
 		astronautFire = new Animation(0.1f, fire);
-
 	}
-	public static void reloadAstronaut(){
+
+	public static void reloadAstronaut() {
 		astronautTexture.reload();
 	}
-	public static void unloadAstronaut(){
+
+	public static void unloadAstronaut() {
 		astronautTexture.dispose();
 	}
-	public static void clearAstronaut(){
+
+	public static void clearAstronaut()  {
 		astronautTexture = null;
 
 		astronautBody = null;
-		astronautNeutralFace = null;
-		astronautWorriedFace = null;
 		astronautLeftArm = null;
+		astronautNeutralFace = null;
 		astronautRightArm = null;
+		astronautWorriedFace = null;
+		winningPose = null;
 
 		fire_01 = null;
 		fire_02 = null;
@@ -551,5 +537,9 @@ public class Assets {
 		fire_14 = null;
 		fire_15 = null;
 		fire_16 = null;
+
+		fire = null;
+
+		astronautFire = null;
 	}
 }

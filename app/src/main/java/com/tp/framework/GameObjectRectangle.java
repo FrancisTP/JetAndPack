@@ -271,7 +271,7 @@ public class GameObjectRectangle {
 		else if(topLeftY == topRightY){
 			topAng = 0;
 		}
-		
+
 		batcher.drawSprite((topLeftX + topRightX) / 2, (topLeftY + topRightY) / 2, topLength, 2, topAng, Assets.line);
 		
 		

@@ -26,13 +26,16 @@ public class Levels extends GLScreen{
     protected Vector2 touchPoint;
     protected FPSCounter fpsCounter = new FPSCounter();
 
-    final protected static int LOADING_STATE = -1;
-    final protected static int RUNNING_STATE = 0;
-    final protected static int PAUSE_STATE = 2;
-
     protected float stateTime;
     protected float deltaT;
-    protected static int state;
+
+    final public static int LOADING_STATE = -1;
+    final public static int RUNNING_STATE = 0;
+    final public static int PAUSED_STATE = 2;
+    final public static int WINNING_STATE = 3;
+    final public static int LOOSING_STATE = 4;
+    public static int state;
+    public static boolean isAstronautFinished;
 
     public Levels(Game game) {
         super(game);
@@ -72,25 +75,23 @@ public class Levels extends GLScreen{
 
 
 
-            if(state == RUNNING_STATE){}
+            if(state == RUNNING_STATE) {
+                if (event.type == Input.TouchEvent.TOUCH_UP) {
+                    touchPoint.set(event.x, event.y);
+                    guiCam.touchToWorld(touchPoint);
+
+                }
+                if (event.type == Input.TouchEvent.TOUCH_DOWN) {
+                    touchPoint.set(event.x, event.y);
+                    guiCam.touchToWorld(touchPoint);
 
 
-            if (event.type == Input.TouchEvent.TOUCH_UP) {
-                touchPoint.set(event.x, event.y);
-                guiCam.touchToWorld(touchPoint);
+                }
+                if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
+                    touchPoint.set(event.x, event.y);
+                    guiCam.touchToWorld(touchPoint);
 
-            }
-            if (event.type == Input.TouchEvent.TOUCH_DOWN) {
-                touchPoint.set(event.x, event.y);
-                guiCam.touchToWorld(touchPoint);
-
-
-            }
-            if (event.type == Input.TouchEvent.TOUCH_DRAGGED) {
-                touchPoint.set(event.x, event.y);
-                guiCam.touchToWorld(touchPoint);
-
-
+                }
             }
         }
     }

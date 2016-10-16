@@ -58,7 +58,7 @@ public class QuitButton {
         lightSprite = Assets.pauseMenuQuitButtonLight;
         darkSprite = Assets.pauseMenuQuitButtonDark;
 
-        bounds = new Rectangle(248, 286, lightSprite.width, lightSprite.height);
+        bounds = new Rectangle(640, 286, lightSprite.width, lightSprite.height);
         this.screen = screen;
     }
 
@@ -100,11 +100,10 @@ public class QuitButton {
 
     public void display(SpriteBatcher batcher){
 
-        if(state == BOUNDS_NOT_TOUCHED)
+        if(state == BOUNDS_NOT_TOUCHED) {
             batcher.drawSprite(bounds.x, bounds.y, bounds.width, bounds.height, lightSprite);
-        else
+        } else {
             batcher.drawSprite(bounds.x, bounds.y, bounds.width, bounds.height, darkSprite);
-
-
+        }
     }
 }
