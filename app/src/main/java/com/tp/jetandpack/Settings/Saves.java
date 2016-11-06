@@ -1,4 +1,4 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Settings;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

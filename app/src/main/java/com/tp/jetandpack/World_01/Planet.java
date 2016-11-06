@@ -1,6 +1,4 @@
-package com.tp.jetandpack;
-
-import android.util.Log;
+package com.tp.jetandpack.World_01;
 
 import com.tp.framework.Game;
 import com.tp.framework.Input;
@@ -8,11 +6,10 @@ import com.tp.framework.gl.Camera2D;
 import com.tp.framework.gl.SpriteBatcher;
 import com.tp.framework.gl.TextureRegion;
 import com.tp.framework.impl.GLGame;
-import com.tp.framework.math.Circle;
-import com.tp.framework.math.OverlapTester;
 import com.tp.framework.GameObjectCircle;
 import com.tp.framework.math.Vector2;
 import com.tp.framework.math.Rectangle;
+import com.tp.jetandpack.Assets.Assets;
 
 import java.util.List;
 

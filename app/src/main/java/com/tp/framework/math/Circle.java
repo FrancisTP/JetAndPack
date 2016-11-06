@@ -1,7 +1,7 @@
 package com.tp.framework.math;
 
 import com.tp.framework.gl.SpriteBatcher;
-import com.tp.jetandpack.Assets;
+import com.tp.jetandpack.Assets.Assets;
 
 public class Circle {
 	public final Vector2 center = new Vector2();

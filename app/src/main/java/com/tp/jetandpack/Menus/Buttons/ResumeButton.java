@@ -1,6 +1,4 @@
-package com.tp.jetandpack;
-
-import android.util.Log;
+package com.tp.jetandpack.Menus.Buttons;
 
 import com.tp.framework.Game;
 import com.tp.framework.Input;
@@ -10,13 +8,14 @@ import com.tp.framework.impl.GLGame;
 import com.tp.framework.math.OverlapTester;
 import com.tp.framework.math.Rectangle;
 import com.tp.framework.math.Vector2;
+import com.tp.jetandpack.Menus.LoadingScreen;
 
 import java.util.List;
 
 /**
  * Created by franc on 2016-01-27.
  */
-public class BackButton {
+public class ResumeButton {
 
 
     private Rectangle bounds;
@@ -27,17 +26,17 @@ public class BackButton {
 
     private String number;
 
-    public BackButton(float x, float y, float widthHeight, String number) {
+    public ResumeButton(float x, float y, float widthHeight, String number) {
         bounds = new Rectangle(x, y, widthHeight, widthHeight);
         this.number = number;
     }
 
-    public BackButton(float x, float y, float width,float height, String number) {
+    public ResumeButton(float x, float y, float width, float height, String number) {
         bounds = new Rectangle(x, y, width, height);
         this.number = number;
     }
 
-    public BackButton(Rectangle bounds, String number){
+    public ResumeButton(Rectangle bounds, String number){
         this.bounds = bounds;
         this.number = number;
     }

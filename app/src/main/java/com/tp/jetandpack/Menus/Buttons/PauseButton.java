@@ -1,4 +1,4 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Menus.Buttons;
 
 import android.util.Log;
 
@@ -11,6 +11,8 @@ import com.tp.framework.impl.GLGame;
 import com.tp.framework.math.OverlapTester;
 import com.tp.framework.math.Rectangle;
 import com.tp.framework.math.Vector2;
+import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Menus.GameMenus.PauseMenu;
 
 import java.util.List;
 

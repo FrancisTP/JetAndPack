@@ -1,4 +1,4 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;

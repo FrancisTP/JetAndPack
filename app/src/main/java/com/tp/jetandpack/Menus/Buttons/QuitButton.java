@@ -1,46 +1,68 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Menus.Buttons;
 
 import com.tp.framework.Game;
 import com.tp.framework.Input;
 import com.tp.framework.gl.Camera2D;
 import com.tp.framework.gl.SpriteBatcher;
+import com.tp.framework.gl.TextureRegion;
 import com.tp.framework.impl.GLGame;
 import com.tp.framework.math.OverlapTester;
 import com.tp.framework.math.Rectangle;
 import com.tp.framework.math.Vector2;
+import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Menus.LoadingScreen;
 
 import java.util.List;
 
 /**
  * Created by franc on 2016-01-27.
  */
-public class ResumeButton {
+public class QuitButton {
 
 
     private Rectangle bounds;
     private int state;
 
+    TextureRegion lightSprite, darkSprite;
+
     final int BOUNDS_NOT_TOUCHED = 0;
     final int BOUNDS_TOUCHED = 1;
 
-    private String number;
+    private String screen;
 
-    public ResumeButton(float x, float y, float widthHeight, String number) {
+    public QuitButton(float x, float y, float widthHeight, String screen) {
+        lightSprite = Assets.pauseMenuQuitButtonLight;
+        darkSprite = Assets.pauseMenuQuitButtonDark;
+
         bounds = new Rectangle(x, y, widthHeight, widthHeight);
-        this.number = number;
+        this.screen = screen;
     }
 
-    public ResumeButton(float x, float y, float width, float height, String number) {
+    public QuitButton(float x, float y, float width, float height, String screen) {
+        lightSprite = Assets.pauseMenuQuitButtonLight;
+        darkSprite = Assets.pauseMenuQuitButtonDark;
+
         bounds = new Rectangle(x, y, width, height);
-        this.number = number;
+        this.screen = screen;
     }
 
-    public ResumeButton(Rectangle bounds, String number){
+    public QuitButton(Rectangle bounds, String screen){
+        lightSprite = Assets.pauseMenuQuitButtonLight;
+        darkSprite = Assets.pauseMenuQuitButtonDark;
+
         this.bounds = bounds;
-        this.number = number;
+        this.screen = screen;
     }
 
-    public void listenToTouches(List<Input.TouchEvent> touchEvents, Camera2D guiCam, Game game, GLGame glGame, Vector2 touchPoint, String screen) {
+    public QuitButton(String screen){
+        lightSprite = Assets.pauseMenuQuitButtonLight;
+        darkSprite = Assets.pauseMenuQuitButtonDark;
+
+        bounds = new Rectangle(248, 286, lightSprite.width, lightSprite.height);
+        this.screen = screen;
+    }
+
+    public void listenToTouches(List<Input.TouchEvent> touchEvents, Camera2D guiCam, Game game, GLGame glGame, Vector2 touchPoint) {
 
         int len = touchEvents.size();
 
@@ -55,10 +77,8 @@ public class ResumeButton {
                 state = BOUNDS_NOT_TOUCHED;
 
                 if(OverlapTester.pointInRectangle(bounds, touchPoint)){
-                    if(number.equals("1")) {
-                        game.setScreen(new LoadingScreen(glGame, screen));
-                        return;
-                    }
+                    game.setScreen(new LoadingScreen(glGame, screen));
+                    return;
                 }
             }
 
@@ -80,10 +100,10 @@ public class ResumeButton {
 
     public void display(SpriteBatcher batcher){
 
-        if(state == BOUNDS_NOT_TOUCHED){}
-            // Light
-        else{}
-            // Dark
+        if(state == BOUNDS_NOT_TOUCHED)
+            batcher.drawSprite(bounds.x, bounds.y, bounds.width, bounds.height, lightSprite);
+        else
+            batcher.drawSprite(bounds.x, bounds.y, bounds.width, bounds.height, darkSprite);
 
 
     }

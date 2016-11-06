@@ -1,8 +1,7 @@
-package com.tp.jetandpack;
-
-import android.util.Log;
+package com.tp.jetandpack.Assets.Objects;
 
 import com.tp.framework.gl.SpriteBatcher;
+import com.tp.jetandpack.Assets.Assets;
 
 import java.util.Random;
 

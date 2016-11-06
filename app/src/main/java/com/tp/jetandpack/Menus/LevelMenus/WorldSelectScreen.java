@@ -1,12 +1,8 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Menus.LevelMenus;
 
 import android.annotation.SuppressLint;
-import android.util.FloatMath;
-import android.util.Log;
 
-import com.tp.framework.CollisionTester;
 import com.tp.framework.Game;
-import com.tp.framework.GameObject;
 import com.tp.framework.Input.TouchEvent;
 //import com.tp.framework.gl.Animation;
 import com.tp.framework.gl.Camera2D;
@@ -15,10 +11,12 @@ import com.tp.framework.gl.SpriteBatcher;
 //import com.tp.framework.gl.TextureRegion;
 import com.tp.framework.impl.GLScreen;
 //import com.tp.framework.math.Circle;
-import com.tp.framework.math.Circle;
 import com.tp.framework.math.Rectangle;
 import com.tp.framework.math.Vector2;
 import com.tp.framework.math.OverlapTester;
+import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Menus.LoadingScreen;
+import com.tp.jetandpack.Settings.SoundController;
 
 import java.util.List;
 

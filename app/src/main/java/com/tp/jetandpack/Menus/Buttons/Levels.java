@@ -1,4 +1,4 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Menus.Buttons;
 
 import android.annotation.SuppressLint;
 
@@ -9,6 +9,8 @@ import com.tp.framework.gl.FPSCounter;
 import com.tp.framework.gl.SpriteBatcher;
 import com.tp.framework.impl.GLScreen;
 import com.tp.framework.math.Vector2;
+import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Settings.SoundController;
 
 import java.util.List;
 

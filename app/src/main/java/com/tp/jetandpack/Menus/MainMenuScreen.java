@@ -1,14 +1,11 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Menus;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.microedition.khronos.opengles.GL10;
 
 import android.annotation.SuppressLint;
-import android.util.FloatMath;
-import android.util.Log;
 
 import com.tp.framework.CollisionTester;
 import com.tp.framework.Game;
@@ -25,6 +22,8 @@ import com.tp.framework.math.Circle;
 import com.tp.framework.math.Rectangle;
 import com.tp.framework.math.Vector2;
 import com.tp.framework.math.OverlapTester;
+import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Settings.SoundController;
 
 public class MainMenuScreen extends GLScreen {
 	// Variables 
@@ -54,19 +53,19 @@ public class MainMenuScreen extends GLScreen {
 	final int BOUNDS_NOT_TOUCHED = 0;
 	final int BOUNDS_TOUCHED = 1;
 
-	Star starOne;
-	Star starTwo;
-	Star starThree;
-	Star starFour;
-	Star starFive;
-	Star starSix;
-	Star starSeven;
+	Assets.Star starOne;
+	Assets.Star starTwo;
+	Assets.Star starThree;
+	Assets.Star starFour;
+	Assets.Star starFive;
+	Assets.Star starSix;
+	Assets.Star starSeven;
 
-	ShootingStar shootingStarOne;
-	ShootingStar shootingStarTwo;
+	Assets.ShootingStar shootingStarOne;
+	Assets.ShootingStar shootingStarTwo;
 
 	final int starNumber = 15;
-	DisapearingStar[] disapearingStars;
+	Assets.DisapearingStar[] disapearingStars;
 
 	Circle noStarZone;
 
@@ -100,25 +99,25 @@ public class MainMenuScreen extends GLScreen {
 		storeState = BOUNDS_NOT_TOUCHED;
 
 		// Initiating stars
-		starOne = new Star(88, 750, 22, 22);
-		starTwo = new Star(135, 725, 10, 10);
-		starThree = new Star(40, 700, 15, 15);
+		starOne = new Assets.Star(88, 750, 22, 22);
+		starTwo = new Assets.Star(135, 725, 10, 10);
+		starThree = new Assets.Star(40, 700, 15, 15);
 
-		starFour = new Star(17, 270, 10, 10);
-		starFive = new Star(26, 255, 15, 15);
+		starFour = new Assets.Star(17, 270, 10, 10);
+		starFive = new Assets.Star(26, 255, 15, 15);
 
-		starSix = new Star(177, 30, 17, 17);
-		starSeven = new Star(192, 50, 12, 12);
+		starSix = new Assets.Star(177, 30, 17, 17);
+		starSeven = new Assets.Star(192, 50, 12, 12);
 
-		shootingStarOne = new ShootingStar();
-		shootingStarTwo = new ShootingStar();
+		shootingStarOne = new Assets.ShootingStar();
+		shootingStarTwo = new Assets.ShootingStar();
 
 		noStarZone = new Circle(880, 200, 476);
 
-		disapearingStars = new DisapearingStar[starNumber];
+		disapearingStars = new Assets.DisapearingStar[starNumber];
 
 		for(int i=0; i < disapearingStars.length; i++){
-			disapearingStars[i] = new DisapearingStar();
+			disapearingStars[i] = new Assets.DisapearingStar();
 		}
 
 

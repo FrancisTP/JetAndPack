@@ -1,4 +1,4 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Astronaut;
 
 import android.util.Log;
 

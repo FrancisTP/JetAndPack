@@ -1,4 +1,4 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Menus.GameMenus;
 
 import com.tp.framework.Game;
 import com.tp.framework.Input;
@@ -6,9 +6,9 @@ import com.tp.framework.gl.Camera2D;
 import com.tp.framework.gl.SpriteBatcher;
 import com.tp.framework.gl.TextureRegion;
 import com.tp.framework.impl.GLGame;
-import com.tp.framework.math.OverlapTester;
-import com.tp.framework.math.Rectangle;
 import com.tp.framework.math.Vector2;
+import com.tp.jetandpack.Assets.Assets;
+import com.tp.jetandpack.Menus.Buttons.QuitButton;
 
 import java.util.List;
 

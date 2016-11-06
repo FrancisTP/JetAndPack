@@ -1,7 +1,7 @@
 package com.tp.framework;
 
 import com.tp.framework.gl.SpriteBatcher;
-import com.tp.jetandpack.Assets;
+import com.tp.jetandpack.Assets.Assets;
 
 public class GameObjectCircle {
 	public static float TO_RADIANS = (1 / 180.0f) * (float)Math.PI;

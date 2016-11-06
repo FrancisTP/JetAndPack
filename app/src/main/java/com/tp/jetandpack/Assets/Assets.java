@@ -1,4 +1,4 @@
-package com.tp.jetandpack;
+package com.tp.jetandpack.Assets;
 
 //import com.tp.framework.Music;
 //import com.tp.framework.Sound;
